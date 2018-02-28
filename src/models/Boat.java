@@ -1,5 +1,5 @@
 package models;
 
-public class Cars {
+public class Boat {
 
 }
