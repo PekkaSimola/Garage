@@ -22,8 +22,11 @@ public class Garage {
 	}
 
 	public void parkVehicle(Vehicle v) {
-		if(!.v.parked()) {
-			v.parkVehicle();
+		if(! vehicles.contains(v) ) {
+			vehicles.add(v);
+		}
+		else {
+			System.out.println("The vehicle is already parked in the garage.");
 		}
 	}
 
