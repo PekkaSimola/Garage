@@ -14,13 +14,4 @@ public class Aircraft extends Vehicle {
 		this.homePort = homePort.trim();
 	}
 
-	public String toString() {
-		
-		String s;
-		
-		
-		
-	}
-	
-
 }

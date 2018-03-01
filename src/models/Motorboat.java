@@ -15,6 +15,14 @@ public class Motorboat extends Boat {
 		this.motorSize = motorSize.trim();
 		this.numberOfEngines = numberOfEngines;
 	}
+
+	public String getMotorSize() {
+		return motorSize;
+	}
+
+	public int getNumberOfEngines() {
+		return numberOfEngines;
+	}
 	
 	
 }

@@ -14,6 +14,10 @@ public class Boat extends Vehicle {
 		this.homePort = homePort.trim();
 	}
 
+	public String getHomePort() {
+		return homePort;
+	}
+
 
 
 

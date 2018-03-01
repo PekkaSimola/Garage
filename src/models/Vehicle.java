@@ -35,6 +35,50 @@ public abstract class Vehicle {
 
 	}
 
+	public String getRegNo() {
+		return regNo;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public FuelType getFuelType() {
+		return fuelType;
+	}
+
+	public int getNumberOfWheels() {
+		return numberOfWheels;
+	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public double getLengthMeters() {
+		return lengthMeters;
+	}
+
+	public double getHeigthMeters() {
+		return heigthMeters;
+	}
+
+	public int getWeightKG() {
+		return weightKG;
+	}
+
+	public int getParkingLot() {
+		return parkingLot;
+	}
+
 	public String toString() {
 		
 		StringBuilder slip = new StringBuilder();
@@ -84,7 +128,7 @@ public abstract class Vehicle {
 			s.append("\nStorlek (");
 			if (length > 0.1 && height > 0.1) {
 				s.append("L×H): ");
-				s.append(f.format(length)
+				s.append(f.format(length));
 				s.append(" × ");
 				s.append(f.format(height));
 				

@@ -13,7 +13,7 @@ public class Garage {
 	int boats = 0;
 	int aircrafts = 0;
 	int buses = 0;
-	int motorcycles = 0;
+	int motorbikes = 0;
 	int parkinglot = 0;
 	
 	Map<Integer, Vehicle> vehicles;
@@ -34,7 +34,7 @@ public class Garage {
 				+ "\n" + boats + " båtar, "
 				+ "\n" + aircrafts + "flygplan, "
 				+ "\n" + buses + "bussar och"
-				+ "\n" + motorcycles + "motorcyklar.");
+				+ "\n" + motorbikes + "motorcyklar.");
 	}
 	
 	public void parkVehicle(Vehicle vehicle) {
@@ -65,7 +65,7 @@ public class Garage {
 		switch(choice) {
 		case 1:
 			for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-				if(vehicle.getValue().getRegNr() == Integer.parseInt(query)) {
+				if(vehicle.getValue().getRegNo().equals(query)) {
 					results.add(vehicle.getValue());
 				}
 			}
@@ -76,7 +76,7 @@ public class Garage {
 
 			switch(query) {
 			
-			case("car"):	
+			case("bil"):	
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Car ) {
 						results.add(vehicle.getValue());
@@ -84,7 +84,7 @@ public class Garage {
 				}//for
 				break;
 				
-			case("boat"):
+			case("båt"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Boat ) {
 						results.add(vehicle.getValue());
@@ -92,7 +92,7 @@ public class Garage {
 				}//for
 				break;
 			
-			case("aircraft"):
+			case("flygplan"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Aircraft ) {
 						results.add(vehicle.getValue());
@@ -100,7 +100,7 @@ public class Garage {
 				}//for
 				break;
 				
-			case("bus"):
+			case("buss"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Bus ) {
 						results.add(vehicle.getValue());
@@ -108,9 +108,9 @@ public class Garage {
 				}//for
 				break;
 				
-			case("motorcycle"):
+			case("motorcykel"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-					if( vehicle.getValue() instanceof Motorcycle ) {
+					if( vehicle.getValue() instanceof Motorbike ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for

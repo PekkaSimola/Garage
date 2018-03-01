@@ -17,6 +17,18 @@ public class Bus extends Vehicle {
 		this.isHeadedBus = isHeadedBus;
 		this.maxAmountPassengers = maxAmountPassengers;
 	}
+
+	public boolean isDoubleDecker() {
+		return isDoubleDecker;
+	}
+
+	public boolean isHeadedBus() {
+		return isHeadedBus;
+	}
+
+	public int getMaxAmountPassengers() {
+		return maxAmountPassengers;
+	}
 	
 	
 	

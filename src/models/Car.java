@@ -14,6 +14,10 @@ public class Car extends Vehicle {
 		this.carType = carType;
 	}
 
+	public CarType getCarType() {
+		return carType;
+	}
+
 	
 	
 }

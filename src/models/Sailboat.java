@@ -16,6 +16,14 @@ public class Sailboat extends Boat {
 		this.amountSailPoles = amountSailPoles;
 		
 	}
+
+	public int getAmountSails() {
+		return amountSails;
+	}
+
+	public int getAmountSailPoles() {
+		return amountSailPoles;
+	}
 	
 
 
