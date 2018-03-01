@@ -8,18 +8,18 @@ import java.util.Map.Entry;
 public class Garage {
 
 	private int maxCapacity = 0;
+	int cars = 0;
+	int boats = 0;
+	int aeroplanes = 0;
+	int buses = 0;
+	int motorcykles = 0;
 
-<<<<<<< HEAD
 	Map<Integer, Vehicle> vehicles;
 
 	public Garage() {
-		
+		ve
 	}
-=======
-	List<Vehicle> vehicles;
-	
-	//TODO add-method
->>>>>>> 60de11e88b2088a71de2f7f6702fdd64ef34ac61
+
 	
 	public void listAllParkedVehicles() {
 		for (Vehicle vehicle : vehicles) {
@@ -27,7 +27,16 @@ public class Garage {
 		}
 	}
 
-	public void listAllCurrentlyParkedTypes() {
+	public void listAll() {
+		int cars = 0;
+		int boats = 0;
+		int aeroplanes = 0;
+		int buses = 0;
+		int motorcykles = 0;
+		}
+
+	}
+/*	public void listAllCurrentlyParkedTypes() {
 		int cars = 0;
 		int boats = 0;
 		int aeroplanes = 0;
@@ -39,7 +48,7 @@ public class Garage {
 			}
 		}
 	}
-
+*/
 	public void parkVehicle(Vehicle vehicle) {
 		if(! vehicles.containsValue(vehicle) ) {
 			vehicles.put(nextKey++, vehicle);
