@@ -30,8 +30,18 @@ public class Bus extends Vehicle {
 		return maxAmountPassengers;
 	}
 	
-	
-	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("\nDubbeldäckare: ");
+		s.append(super.booleanInSwedish(isDoubleDecker));
+		s.append("\nLedad buss: ");
+		s.append(super.booleanInSwedish(isHeadedBus));
+		s.append("\nMaxantal passagerare: ");
+		s.append(maxAmountPassengers);		
+		
+		return s.toString();
+	}
 	
 
 }

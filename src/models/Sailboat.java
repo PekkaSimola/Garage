@@ -25,6 +25,16 @@ public class Sailboat extends Boat {
 		return amountSailPoles;
 	}
 	
-
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		// super = Boat
+		s.append(super.toString());
+		s.append("\nAntal segel: ");
+		s.append(amountSails);		
+		s.append("\nAntal segelstolpar: ");
+		s.append(amountSailPoles);
+		return s.toString();
+	}
+	
 
 }

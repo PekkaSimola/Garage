@@ -12,6 +12,16 @@ public class Aircraft extends Vehicle {
 			  lengthMeters, heigthMeters, weightKG, parkingLot);
 		
 		this.homePort = homePort.trim();
-	}
 
+	}
+	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("\nHemmahamn: ");
+		s.append(homePort);
+		return s.toString();
+	}
+	
+	
 }

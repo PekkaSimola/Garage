@@ -18,6 +18,12 @@ public class Car extends Vehicle {
 		return carType;
 	}
 
-	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("\nBiltyp: ");
+		s.append(super.carTypeToSwedish(carType));
+		return s.toString();
+	}
 	
 }

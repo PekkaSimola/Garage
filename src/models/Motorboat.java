@@ -24,5 +24,15 @@ public class Motorboat extends Boat {
 		return numberOfEngines;
 	}
 	
-	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		//super = Boat
+		s.append(super.toString());
+		s.append("\nMotorstorlek: ");
+		s.append(motorSize);		
+		s.append("\nAntal motorer: ");
+		s.append(numberOfEngines);
+		return s.toString();
+	}
+
 }

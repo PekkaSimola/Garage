@@ -18,8 +18,12 @@ public class Boat extends Vehicle {
 		return homePort;
 	}
 
-
-
-
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("\nHemmahamn: ");
+		s.append(homePort);
+		return s.toString();
+	}
 	
 }

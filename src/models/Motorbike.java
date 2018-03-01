@@ -7,12 +7,19 @@ public class Motorbike extends Vehicle {
 	public Motorbike(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
 			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot,
 			boolean hasSideCar) {
-		
-		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats,
-			  lengthMeters, heigthMeters, weightKG,	parkingLot);
-		
+
+		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats, lengthMeters, heigthMeters, weightKG,
+				parkingLot);
+
 		this.hasSideCar = hasSideCar;
 	}
 
-	
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(super.toString());
+		s.append("\nHar sidovagn: ");
+		s.append(super.booleanInSwedish(hasSideCar));
+		return s.toString();
+	}
+
 }
