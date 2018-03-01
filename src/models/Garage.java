@@ -9,11 +9,17 @@ public class Garage {
 
 	private int maxCapacity = 0;
 
+<<<<<<< HEAD
 	Map<Integer, Vehicle> vehicles;
 
 	public Garage() {
 		
 	}
+=======
+	List<Vehicle> vehicles;
+	
+	//TODO add-method
+>>>>>>> 60de11e88b2088a71de2f7f6702fdd64ef34ac61
 	
 	public void listAllParkedVehicles() {
 		for (Vehicle vehicle : vehicles) {
@@ -47,7 +53,7 @@ public class Garage {
 		maxCapacity = newMax;
 	}
 
-	public Vehicle findVehicle() {
+	public Vehicle findVehicle(Vehicle vehicle, VehicleType vehicleType) {
 		return null;
 	}
 	
