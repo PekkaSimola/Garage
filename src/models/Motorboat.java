@@ -5,14 +5,14 @@ public class Motorboat extends Boat {
 	private String motorSize;
 	private int numberOfEngines;
 	
-	public Motorboat(String regNo, String color, int numberOfWheels, String model,
-			String brand, double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
-			String parkingDenotation, String homePort, String motorSize, int numberOfEngines) {
+	public Motorboat(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
+			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot, String homePort,
+			String motorSize, int numberOfEngines) {
 		
-		super(regNo, color, numberOfWheels, model, brand, lengthMeters, heigthMeters, weightKG, fuelType,
-				numberOfSeats, parkingDenotation, homePort);
+		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats,
+			  lengthMeters, heigthMeters, weightKG,	parkingLot, homePort);
 		
-		this.motorSize = motorSize;
+		this.motorSize = motorSize.trim();
 		this.numberOfEngines = numberOfEngines;
 	}
 	

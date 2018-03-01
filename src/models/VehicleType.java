@@ -1,6 +1,5 @@
 package models;
 
 public enum VehicleType {
-	SEDAN, HATCHBACK, COUPE, VAN
-
+	SEDAN, HATCHBACK, COUPE, VAN, UNDEFINED
 }
