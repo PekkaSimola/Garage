@@ -60,50 +60,74 @@ public class Garage {
 	}
 	
 	public List<Vehicle> findByProperty(int choice, String query) {
-		List<Vehicle> result = new ArrayList();
+		List<Vehicle> results = new ArrayList();
 		
 		switch(choice) {
 		case 1:
 			for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 				if(vehicle.getValue().getRegNr() == Integer.parseInt(query)) {
-					result.add(vehicle.getValue());
+					results.add(vehicle.getValue());
 				}
 			}
 			break;
-		case 2:
 			
+		case 2:
 			query = query.toLowerCase();
 
-			Vehicle temp;
-			
 			switch(query) {
 			
-			case("car"):
-				temp = (Car)temp;
+			case("car"):	
+				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+					if( vehicle.getValue() instanceof Car ) {
+						results.add(vehicle.getValue());
+					}//if
+				}//for
 				break;
+				
 			case("boat"):
-				temp = (Boat)temp;
+				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+					if( vehicle.getValue() instanceof Boat ) {
+						results.add(vehicle.getValue());
+					}//if
+				}//for
 				break;
+			
 			case("aircraft"):
-				temp = (Aircraft);
+				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+					if( vehicle.getValue() instanceof Aircraft ) {
+						results.add(vehicle.getValue());
+					}//if
+				}//for
 				break;
+				
 			case("bus"):
-				temp = (Bus)temp;
+				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+					if( vehicle.getValue() instanceof Bus ) {
+						results.add(vehicle.getValue());
+					}//if
+				}//for
+				break;
+				
 			case("motorcycle"):
-				temp = (Motorcycle)temp;
+				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+					if( vehicle.getValue() instanceof Motorcycle ) {
+						results.add(vehicle.getValue());
+					}//if
+				}//for
 				break;
 			
 			default:
 				break;
-			}
+			}//switch
+			
+		case 3:
 			for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-				if(vehicle.getValue().instanceOf(temp)) {
-					result.add(vehicle.getValue());
-				}//if
-			}//for
-				
-				
+				if(vehicle.getValue().getColor().equals(query)) {
+					results.add(vehicle.getValue());
+				}
+			}
 		}//switch
+		return results
 	}
 	
 }

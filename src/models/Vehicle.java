@@ -1,10 +1,5 @@
 package models;
 
-// Common properties of all vehicles
-<<<<<<< HEAD
-public abstract class Vehicle {
-=======
-// NOTE to Ozur; Niklas wants this to be an abstract class to prevent instantiation of it
 public abstract class Vehicle {
 	
 	private boolean parked;
