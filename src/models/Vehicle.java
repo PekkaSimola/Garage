@@ -1,31 +1,31 @@
 package models;
 
-import java.text.DecimalFormat;
 
 public abstract class Vehicle {
-
+	
+	private boolean parked;
 	private String regNo;
+	private String color;
+	private int numberOfWheels;
 	private String model;
 	private String brand;
-	private String color;
-	private FuelType fuelType;
-	private int numberOfWheels;
-	private int numberOfSeats;
 	private double lengthMeters;
 	private double heigthMeters;
 	private int weightKG;
-	private int parkingLot;
-
-	// parkingLot can be used for both floor, section, lot number, etc
-	// using the modular-operator; implemented later (PS)
-	public Vehicle(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
-			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot) {
-
-		this.regNo = regNo.trim();
-		this.color = color.trim();
+	private FuelType fuelType;
+	private int numberOfSeats;
+	private String parkingDenotation;
+		
+	public Vehicle(String regNo, String color, int numberOfWheels, String model, String brand, double lengthMeters,
+			double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats, String parkingDenotation) {
+	
+		parked = true;
+		
+		this.regNo = regNo;
+		this.color = color;
 		this.numberOfWheels = numberOfWheels;
-		this.model = model.trim();
-		this.brand = brand.trim();
+		this.model = model;
+		this.brand = brand;
 		this.lengthMeters = lengthMeters;
 		this.heigthMeters = heigthMeters;
 		this.weightKG = weightKG;
@@ -36,6 +36,8 @@ public abstract class Vehicle {
 	}
 
 	public Vehicle(String regNo, String brand, String color) {
+		
+		parked = true;
 
 		this.regNo = regNo.trim();
 		this.color = color.trim();
@@ -227,6 +229,10 @@ public abstract class Vehicle {
 
 	private String zeroToQuestionMark(double no) {
 		return zeroToQuestionMark((int) no);
+		this.parkingDenotation = parkingDenotation;
+		
 	}
+	
+	
 
 }

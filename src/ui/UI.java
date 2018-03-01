@@ -1,29 +1,40 @@
 package ui;
 
+import java.util.List;
 import java.util.Scanner;
 
+import models.Aircraft;
+import models.Boat;
+import models.Bus;
+import models.Car;
 import models.Garage;
+import models.Motorbike;
+import models.Vehicle;
 
 public class UI {
 
 	Scanner sc;
+	String input = "";
+	String query = "";
+	int choice = 0;
 	Garage garage;
 	
-	public UI() {
+	public UI(Garage garage) {
 		sc = new Scanner(System.in);
-		garage = new Garage();
+		this.garage = garage;
 		run();
 	}
 	
 	public void run() {
-		String input = "";
 		
 		while( !input.equalsIgnoreCase("q") ) {
-			System.out.println("Hej och välkommen till det Granna Garaget!"
-				+ "\nWhat would you like to do?"
-				+ "\n1: Park a vehicle"
-				+ "\n2: List parked vehicles"
-				+ "\nQ: Quit");
+			System.out.println("****************************************"
+				+ "\nHej och välkommen till det Granna Garaget!"
+				+ "\nVad vill du göra?"
+				+ "\n1: Parkera ett fordon"
+				+ "\n2: Lista alla parkerade fordon"
+				+ "\n3: Söka efter ett fordon"
+				+ "\nQ: Avsluta");
 			
 			input = sc.nextLine();
 			
@@ -40,16 +51,17 @@ public class UI {
 				findByProperty();
 			}
 		}
-		System.out.println("Thank you for visiting the Grand Garage!\nHave a nice day!");
+		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 	}
 	
 	public void findByProperty() {
-		String query = "";
+		List<Vehicle> results;
+		
 		System.out.println("På vilken egenskap vill du göra sökningen?"
 				+ "\n1: Registreringsnummer"
 				+ "\n2: Typ av fordon"
 				+ "\n3: Färg");
-		int choice = sc.nextInt();
+		choice = sc.nextInt();
 		
 		if(choice == 1) {
 			System.out.println("Vänligen ange registreringsnummer:");
@@ -68,8 +80,52 @@ public class UI {
 		
 		query = sc.nextLine();
 		
-		garage.findByProperty(choice, query);
+		results = garage.findByProperty(choice, query);
+	
+		System.out.println("Din sökning gav följande resultat:");
+		for(Vehicle vehicle : results) {
+			System.out.println(vehicle.toString());
+		}
+		System.out.println("****************************************");
 	}
 	
-	public void parkVehicle() {}
+	public void parkVehicle() {
+		String regNo = "";
+		String color = "";
+		String brand = "";
+		String type = "";
+		
+		System.out.println("Vänligen ange fordonstyp:"
+				+ "\n1: Bil"
+				+ "\n2: Båt"
+				+ "\n3: Flygplan"
+				+ "\n4: Buss"
+				+ "\n5: Motorcykel");
+		choice = sc.nextInt();
+		
+		System.out.println("Ange registreringsnummer:");
+		regNo = sc.nextLine();
+		System.out.println("Ange färg:");
+		color = sc.nextLine();
+		System.out.println("Ange märke:");
+		brand = sc.nextLine();
+
+		switch(choice) {
+		case 1:
+			garage.parkVehicle( new Car(regNo, color, brand) );
+			break;
+		case 2:
+			garage.parkVehicle( new Boat(regNo, color, brand) );
+			break;
+		case 3:
+			garage.parkVehicle( new Aircraft(regNo, color, brand) );
+			break;
+		case 4:
+			garage.parkVehicle( new Bus(regNo, color, brand) );
+			break;
+		case 5:
+			garage.parkVehicle( new Motorbike(regNo, color, brand) );
+			break;
+		}//switch
+	}
 }
