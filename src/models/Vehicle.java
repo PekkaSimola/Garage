@@ -16,19 +16,11 @@ public abstract class Vehicle {
 	private FuelType fuelType;
 	private int numberOfSeats;
 	private String parkingDenotation;
-	
-	
-	//TODO: remove this later
-	// set to standard type (ANY) here
-	// subClasses might change to a more specific type
-	private VehicleType vehicleType;
-	
-	public Vehicle(VehicleType vehicleType, String regNo, String color, int numberOfWheels, String model, String brand, double lengthMeters,
-			double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats, String parkingDenotation) {
-		//super();
 		
+	public Vehicle(String regNo, String color, int numberOfWheels, String model, String brand, double lengthMeters,
+			double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats, String parkingDenotation) {
+	
 		parked = true;
-		vehicleType = VehicleType.ANY; // standard-type
 		
 		this.regNo = regNo;
 		this.color = color;
