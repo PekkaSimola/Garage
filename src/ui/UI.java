@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.List;
 import java.util.Scanner;
 
 import models.Aircraft;
@@ -8,6 +9,7 @@ import models.Bus;
 import models.Car;
 import models.Garage;
 import models.Motorbike;
+import models.Vehicle;
 
 public class UI {
 
@@ -17,9 +19,9 @@ public class UI {
 	int choice = 0;
 	Garage garage;
 	
-	public UI() {
+	public UI(Garage garage) {
 		sc = new Scanner(System.in);
-		garage = new Garage();
+		this.garage = garage;
 		run();
 	}
 	
@@ -53,6 +55,8 @@ public class UI {
 	}
 	
 	public void findByProperty() {
+		List<Vehicle> results;
+		
 		System.out.println("På vilken egenskap vill du göra sökningen?"
 				+ "\n1: Registreringsnummer"
 				+ "\n2: Typ av fordon"
@@ -76,7 +80,13 @@ public class UI {
 		
 		query = sc.nextLine();
 		
-		garage.findByProperty(choice, query);
+		results = garage.findByProperty(choice, query);
+	
+		System.out.println("Din sökning gav följande resultat:");
+		for(Vehicle vehicle : results) {
+			System.out.println(vehicle.toString());
+		}
+		System.out.println("****************************************");
 	}
 	
 	public void parkVehicle() {
