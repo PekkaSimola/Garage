@@ -1,10 +1,16 @@
 package models;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 public class Garage {
 
@@ -128,6 +134,26 @@ public class Garage {
 			}
 		}//switch
 		return results;
+	}
+	
+	public void save() throws FileNotFoundException{
+		String temp = vehicles.toString();
+		
+		try {
+			PrintWriter pw = new PrintWriter(new FileOutputStream("garage.lex"));
+			pw.write(temp);
+			pw.close();
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
+		}	
+	}
+	
+	public void load() throws FileNotFoundException{
+		ArrayList<Vehicle> test = new ArrayList();
+		FileInputStream in = new FileInputStream("garage.lex");
+		Scanner sc = new Scanner(in);
+		test.addAll(sc.next());
 	}
 	
 }

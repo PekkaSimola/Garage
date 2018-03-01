@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,6 +52,13 @@ public class UI {
 				findByProperty();
 			}
 		}
+		
+		try {
+			garage.save();
+		}catch(FileNotFoundException e) {
+			System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
+		}
+		
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 	}
 	
