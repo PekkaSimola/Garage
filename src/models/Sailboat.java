@@ -5,18 +5,28 @@ public class Sailboat extends Boat {
 	private int amountSails;
 	private int amountSailPoles;
 	
-	public Sailboat(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
-			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot, String homePort,
-			int amountSails, int amountSailPoles) {
+	
+	
+	public Sailboat(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
+			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
+			String parkingDenotation, int parkingLot, String homePort, int amountSails, int amountSailPoles) {
 		
-		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats,
-			  lengthMeters, heigthMeters, weightKG,	parkingLot, homePort);
+		super(parked, regNo, color, numberOfWheels, model, brand, lengthMeters, heigthMeters, weightKG, fuelType,
+				numberOfSeats, parkingDenotation, parkingLot, homePort);
 		
 		this.amountSails = amountSails;
 		this.amountSailPoles = amountSailPoles;
-		
 	}
 
+	public Sailboat(String regNo, String color, String brand) {
+		
+		super(regNo, color, brand);
+		
+		this.amountSails = 1;
+		this.amountSailPoles = 1;
+	}
+
+	
 	public int getAmountSails() {
 		return amountSails;
 	}

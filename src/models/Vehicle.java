@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 
 public abstract class Vehicle {
 	
@@ -15,10 +16,12 @@ public abstract class Vehicle {
 	private FuelType fuelType;
 	private int numberOfSeats;
 	private String parkingDenotation;
+	private int parkingLot;
 		
-	public Vehicle(String regNo, String color, int numberOfWheels, String model, String brand, double lengthMeters,
-			double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats, String parkingDenotation) {
-	
+	public Vehicle(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
+			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
+			String parkingDenotation, int parkingLot) {
+		
 		parked = true;
 		
 		this.regNo = regNo;
@@ -31,11 +34,11 @@ public abstract class Vehicle {
 		this.weightKG = weightKG;
 		this.fuelType = fuelType;
 		this.numberOfSeats = numberOfSeats;
+		this.parkingDenotation = parkingDenotation;
 		this.parkingLot = parkingLot;
-
 	}
 
-	public Vehicle(String regNo, String brand, String color) {
+	public Vehicle(String regNo, String color, String brand) {
 		
 		parked = true;
 
@@ -49,12 +52,9 @@ public abstract class Vehicle {
 		this.weightKG = 0;
 		this.fuelType = FuelType.UNDEFINED;
 		this.numberOfSeats = 0;
-		this.parkingLot = 0;
+		this.parkingDenotation = "";
+		this.parkingLot = 0;		
 
-	}
-
-	public String getRegNo() {
-		return regNo;
 	}
 
 	public String getRegNo() {
@@ -153,7 +153,7 @@ public abstract class Vehicle {
 			return "Kombi";
 		} else if (ct == CarType.COUPE) {
 			return "Coupé";
-		} else if (ct) {
+		} else if (ct == CarType.VAN) {
 			return "Paketbil";
 		} else {
 			return "Ospecificerad biltyp"; // UNKNOWN
@@ -226,13 +226,5 @@ public abstract class Vehicle {
 			return "" + no;
 		}
 	}
-
-	private String zeroToQuestionMark(double no) {
-		return zeroToQuestionMark((int) no);
-		this.parkingDenotation = parkingDenotation;
-		
-	}
-	
-	
 
 }

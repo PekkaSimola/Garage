@@ -6,18 +6,29 @@ public class Bus extends Vehicle {
 	private boolean isHeadedBus;
 	private int maxAmountPassengers;
 	
-	public Bus(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
-			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot,
-			boolean isDoubleDecker, boolean isHeadedBus, int maxAmountPassengers) {
+	public Bus(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
+			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
+			String parkingDenotation, int parkingLot, boolean isDoubleDecker, boolean isHeadedBus,
+			int maxAmountPassengers) {
 		
-		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats,
-			  lengthMeters, heigthMeters, weightKG,	parkingLot);
-		
+		super(parked, regNo, color, numberOfWheels, model, brand, lengthMeters, heigthMeters, weightKG, fuelType,
+				numberOfSeats, parkingDenotation, parkingLot);
+
 		this.isDoubleDecker = isDoubleDecker;
 		this.isHeadedBus = isHeadedBus;
 		this.maxAmountPassengers = maxAmountPassengers;
 	}
 
+	public Bus(String regNo, String color, String brand) {
+		
+		super(regNo, color, brand);
+
+		this.isDoubleDecker = false;
+		this.isHeadedBus = false;
+		this.maxAmountPassengers = 50;
+	}
+
+	
 	public boolean isDoubleDecker() {
 		return isDoubleDecker;
 	}

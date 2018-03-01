@@ -4,14 +4,21 @@ public class Car extends Vehicle {
 	
 	private CarType carType;
 
-	public Car(String regNo, String model, String brand, String color, FuelType fuelType, int numberOfWheels,
-			int numberOfSeats, double lengthMeters, double heigthMeters, int weightKG, int parkingLot,
-			CarType carType) {
+	public Car(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
+			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
+			String parkingDenotation, int parkingLot, CarType carType) {
 		
-		super(regNo, model, brand, color, fuelType, numberOfWheels, numberOfSeats,
-			  lengthMeters, heigthMeters, weightKG,	parkingLot);
+		super(parked, regNo, color, numberOfWheels, model, brand, lengthMeters, heigthMeters, weightKG, fuelType,
+				numberOfSeats, parkingDenotation, parkingLot);
 		
 		this.carType = carType;
+	}
+
+	public Car(String regNo, String color, String brand) {
+		
+		super(regNo, color, brand);
+		
+		this.carType = CarType.UNDEFINED;
 	}
 
 	public CarType getCarType() {
