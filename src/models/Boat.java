@@ -4,6 +4,7 @@ public class Boat extends Vehicle {
 
 	private String homePort;
 
+	// The Constructor to set all the properties except note
 	public Boat(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot, String homePort) {
@@ -14,6 +15,7 @@ public class Boat extends Vehicle {
 		this.homePort = homePort.trim();
 	}
 
+	// The Constructor to set the non-optional properties
 	public Boat(String regNo, String color, String brand) {
 
 		super(regNo, color, brand);
@@ -23,6 +25,10 @@ public class Boat extends Vehicle {
 
 	public String getHomePort() {
 		return homePort;
+	}
+
+	public void setHomePort(String homePort) {
+		this.homePort = homePort.trim();
 	}
 
 	public String toString() {

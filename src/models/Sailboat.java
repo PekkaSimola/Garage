@@ -5,8 +5,7 @@ public class Sailboat extends Boat {
 	private int amountSails;
 	private int amountSailPoles;
 	
-	
-	
+	// The Constructor to set all the properties except note
 	public Sailboat(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot, String homePort, int amountSails, int amountSailPoles) {
@@ -18,6 +17,7 @@ public class Sailboat extends Boat {
 		this.amountSailPoles = amountSailPoles;
 	}
 
+	// The Constructor to set the non-optional properties
 	public Sailboat(String regNo, String color, String brand) {
 		
 		super(regNo, color, brand);
@@ -27,6 +27,9 @@ public class Sailboat extends Boat {
 	}
 
 	
+	// ——————————————————————————————————
+	// *** START of the local getters ***
+    // ——————————————————————————————————
 	public int getAmountSails() {
 		return amountSails;
 	}
@@ -34,6 +37,7 @@ public class Sailboat extends Boat {
 	public int getAmountSailPoles() {
 		return amountSailPoles;
 	}
+
 	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
