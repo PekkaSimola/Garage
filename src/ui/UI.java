@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -55,7 +56,7 @@ public class UI {
 				break;
 
 				case("2"):
-					listAllParkedVehicles();
+					listAllVehicles();
 				break;
 
 				case("3"):
@@ -63,15 +64,12 @@ public class UI {
 				break;
 
 				default:
-
 					break;
 				}//switch
 			}
-			try {
-				garage.save();
-			}catch(FileNotFoundException e) {
-				System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
-			}
+	
+			garage.save();
+
 		}
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 	}
@@ -117,7 +115,7 @@ public class UI {
 			System.out.println("Vänligen ange fordonets färg:");
 			query = sc.next();
 			
-			resultPresentation = "Din sökning på färg gav följande resultat:";
+			resultPresentation = "Din sökning på färgen " +query+ " gav följande resultat:";
 		}
 
 		results = garage.findByProperty(inputInt, query);
@@ -130,10 +128,10 @@ public class UI {
 	}
 
 	public void parkVehicle() {
+		inputInt = 0;
 		String regNo = "";
 		String color = "";
 		String brand = "";
-		String type = "";
 
 		System.out.println("Vänligen ange fordonstyp:"
 				+ "\n1: Bil"
@@ -141,8 +139,17 @@ public class UI {
 				+ "\n3: Flygplan"
 				+ "\n4: Buss"
 				+ "\n5: Motorcykel");
-		inputInt = sc.nextInt();
-
+		
+		while(inputInt < 1 || inputInt > 5) {
+			try {
+				inputInt = sc.nextInt();
+				break;
+			}catch (InputMismatchException e) {
+				System.out.println("Du har gjort en felaktig inmatning.\nVänligen ange ditt val med 1, 2, 3, 4 eller 5.");
+				sc.nextLine();
+			}
+		}//while
+		
 		System.out.println("Ange registreringsnummer:");
 		regNo = sc.next();
 
@@ -152,6 +159,8 @@ public class UI {
 		System.out.println("Ange märke:");
 		brand = sc.next();
 
+		/*here i suppose we could have a beautiful compact lambda-predicate instead of an ugly redundant switch...
+		*/
 		switch(inputInt) {
 		case 1:
 			garage.parkVehicle( new Car(regNo, color, brand) );
@@ -172,11 +181,7 @@ public class UI {
 		inputString = "";
 	}
 
-	public void listAllParkedVehicles() {
-		Map<Integer, Vehicle> vehicles = garage.getVehicles();
-		for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-			System.out.println(vehicle.getValue().toString());
-		}
-
+	public void listAllVehicles() {
+		garage.toString();
 	}
 }

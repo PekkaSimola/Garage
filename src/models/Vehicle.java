@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public abstract class Vehicle {
+public abstract class Vehicle implements Serializable{
 	
 	private boolean parked;
 	private String regNo;
@@ -138,7 +139,7 @@ public abstract class Vehicle {
 		return parkingLot;
 	}
 
-	public boolean getParkid() {
+	public boolean getParked() {
 		return parked;
 	}
 

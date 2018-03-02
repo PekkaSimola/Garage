@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,7 +81,6 @@ public class Garage {
 
 			switch(query) {
 
-
 			case("1"):	
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Car ) {
@@ -135,25 +135,49 @@ public class Garage {
 		return results;
 	}
 
+	/*
 	public void save() throws FileNotFoundException{
 		String temp = vehicles.toString();
 
 		try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream("garage.lex"));
-			pw.write(temp);
+			pw.write( toString() );
 			pw.close();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
 		}	
 	}
+	 */
+	public void save() {
 
-	/*public void load() throws FileNotFoundException{
-		ArrayList<Vehicle> test = new ArrayList();
+		try {
+			FileOutputStream fout = new FileOutputStream("garage.lex");
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(vehicles);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	public void load() throws FileNotFoundException{
+
 		FileInputStream in = new FileInputStream("garage.lex");
 		Scanner sc = new Scanner(in);
-		test.addAll(sc.next());
+		while(sc.hasNext()) {
+			System.out.println(sc.next().toString());
+		}
+		sc.close();
 	}
-	 */
 
+	public String toString() {
+		String output = "";
+		for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
+			output += vehicle.getValue().toString() + "\n";
+		}
+		return output;
+	}
 }
