@@ -3,8 +3,8 @@ package models;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public abstract class Vehicle implements Serializable{
-	
+public abstract class Vehicle implements Serializable {
+
 	private boolean parked;
 	private String regNo;
 	private String color;
@@ -19,39 +19,39 @@ public abstract class Vehicle implements Serializable{
 	private String parkingDenotation;
 	private int parkingLot;
 	private String note;
-		
-	// The Constructor to set all the properties	
+
+	// The Constructor to set all the properties
 	public Vehicle(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot) {
-		
+
 		parked = true;
-		
-		this.regNo = regNo;
-		this.color = color;
+
+		this.regNo = regNo.trim().toUpperCase();
+		this.color = fixTextInput(color, true);
 		this.numberOfWheels = numberOfWheels;
-		this.model = model;
-		this.brand = brand;
+		this.model = fixTextInput(model, true);
+		this.brand = fixTextInput(brand, true);
 		this.lengthMeters = lengthMeters;
 		this.heigthMeters = heigthMeters;
-		this.weightKG = weightKG; //kan ev. tas bort
-		this.fuelType = fuelType; //kan ev. tas bort
-		this.numberOfSeats = numberOfSeats; //kan ev. tas bort
+		this.weightKG = weightKG; // kan ev. tas bort
+		this.fuelType = fuelType; // kan ev. tas bort
+		this.numberOfSeats = numberOfSeats; // kan ev. tas bort
 		this.parkingDenotation = parkingDenotation;
 		this.parkingLot = parkingLot;
-		this.note ="";
+		this.note = "";
 	}
 
 	// The Constructor to set the non-optional properties
 	public Vehicle(String regNo, String color, String brand) {
-		
+
 		parked = true;
 
-		this.regNo = regNo.trim();
-		this.color = color.trim();
+		this.regNo = regNo.trim().toUpperCase();
+		this.color = fixTextInput(color, true);
 		this.numberOfWheels = 0;
 		this.model = "?";
-		this.brand = brand.trim();
+		this.brand = fixTextInput(brand, true);
 		this.lengthMeters = 0;
 		this.heigthMeters = 0;
 		this.weightKG = 0;
@@ -62,71 +62,68 @@ public abstract class Vehicle implements Serializable{
 		this.note = "";
 
 	}
-	
-	
+
 	// ——————————————————————————————
 	// *** START of local setters ***
-    // ——————————————————————————————
+	// ——————————————————————————————
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
+
 	public void setParkingDenotation(String parkingDenotation) {
 		this.parkingDenotation = parkingDenotation;
 	}
-	
+
 	public void setParkingLot(int parkingLot) {
 		this.parkingLot = parkingLot;
 	}
-	
+
 	public void setModel(String model) {
 		this.model = model;
 	}
 	// ——————————————————————
 	// *** END of setters ***
-    // ——————————————————————
-
-	
+	// ——————————————————————
 
 	// ——————————————————————————————
 	// *** START of local getters ***
-    // ——————————————————————————————
+	// ——————————————————————————————
 	public String getNote() {
 		return note;
 	}
-	
+
 	public String getRegNo() {
 		return regNo;
 	}
-	
+
 	public String getModel() {
 		return model;
 	}
-	
+
 	public String getBrand() {
 		return brand;
 	}
-	
+
 	public String getColor() {
 		return color;
 	}
-	
+
 	public FuelType getFuelType() {
 		return fuelType;
 	}
-	
+
 	public int getNumberOfWheels() {
 		return numberOfWheels;
 	}
-	
+
 	public int getNumberOfSeats() {
 		return numberOfSeats;
 	}
-	
+
 	public double getLengthMeters() {
 		return lengthMeters;
 	}
-	
+
 	public double getHeigthMeters() {
 		return heigthMeters;
 	}
@@ -145,8 +142,8 @@ public abstract class Vehicle implements Serializable{
 
 	// ——————————————————————
 	// *** END of getters ***
-    // ——————————————————————
-	
+	// ——————————————————————
+
 	public String toString() {
 
 		StringBuilder slip = new StringBuilder();
@@ -154,12 +151,14 @@ public abstract class Vehicle implements Serializable{
 		slip.append("RegNr: ");
 		slip.append(regNo);
 
-		slip.append("\nFordon: ");
+		slip.append("\nMärke: ");
 		slip.append(brand);
 		if (brand.length() > 0) {
 			slip.append(" ");
 		}
-		slip.append(model);
+		if (!model.equals("?")) {
+			slip.append(model);
+		}
 
 		slip.append("\nFärg: ");
 		slip.append(color);
@@ -182,7 +181,7 @@ public abstract class Vehicle implements Serializable{
 		slip.append(lengthAndHeightInMeters(lengthMeters, heigthMeters));
 
 		slip.append("\nVikt: ");
-		slip.append(weightKG);
+		slip.append(zeroToQuestionMark(weightKG));
 		if (weightKG > 0) {
 			slip.append(" kg");
 		}
@@ -205,10 +204,10 @@ public abstract class Vehicle implements Serializable{
 		} else if (ct == CarType.VAN) {
 			return "Paketbil";
 		} else {
-			return "Ospecificerad biltyp"; // UNKNOWN
+			return "Uppgift saknas!"; // UNKNOWN
 		}
 	}
-	
+
 	public String booleanInSwedish(boolean b) {
 		if (b == true) {
 			return "SANT";
@@ -230,10 +229,10 @@ public abstract class Vehicle implements Serializable{
 		} else if (ft == FuelType.HYBRID) {
 			return "Hybrid";
 		} else {
-			return "Ospecificerad drivmedelstyp"; // UNKNOWN
+			return "Uppgift saknas!"; // UNKNOWN
 		}
 	}
-	
+
 	// used by toString to get a length and height phrase in Swedish
 	private String lengthAndHeightInMeters(double length, double height) {
 
@@ -274,6 +273,44 @@ public abstract class Vehicle implements Serializable{
 		} else {
 			return "" + no;
 		}
+	}
+
+	public static String fixTextInput(String s, boolean firstCharToUpperCase) {
+
+		s = s.trim();
+
+		// replace tabs with spaces because the loop use spaces as delimiters
+		s = s.replaceAll("\t", " ");
+
+		StringBuilder sentence = new StringBuilder();
+		String[] splited = s.split(" ");
+		String word = new String();
+		String firstChar = "";
+
+		for (int i = 0; i < splited.length; i++) {
+
+			word = splited[i];
+
+			// ignore empty strings (==space)
+			if (word.equals("") == false) {
+
+				// Convert the very first letter to upper case if required
+				if (i == 0 && firstCharToUpperCase == true) {
+					firstChar = word.substring(0, 1);
+					firstChar = firstChar.toUpperCase();
+					word = firstChar + word.substring(1);
+				}
+
+				sentence.append(" ");
+				sentence.append(word);
+			}
+		}
+		if (sentence.length() > 0) {
+			word = sentence.substring(1);
+		}
+
+		return word;
+
 	}
 
 }

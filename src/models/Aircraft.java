@@ -12,7 +12,7 @@ public class Aircraft extends Vehicle {
 		super(parked, regNo, color, numberOfWheels, model, brand, lengthMeters, heigthMeters, weightKG, fuelType,
 				numberOfSeats, parkingDenotation, parkingLot);
 		
-		this.homePort = homePort.trim();
+		this.homePort = super.fixTextInput(homePort, true);
 	}
 	
 	// The Constructor to set the non-optional properties
