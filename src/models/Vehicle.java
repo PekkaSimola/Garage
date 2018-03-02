@@ -33,9 +33,9 @@ public abstract class Vehicle {
 		this.brand = brand;
 		this.lengthMeters = lengthMeters;
 		this.heigthMeters = heigthMeters;
-		this.weightKG = weightKG;
-		this.fuelType = fuelType;
-		this.numberOfSeats = numberOfSeats;
+		this.weightKG = weightKG; //kan ev. tas bort
+		this.fuelType = fuelType; //kan ev. tas bort
+		this.numberOfSeats = numberOfSeats; //kan ev. tas bort
 		this.parkingDenotation = parkingDenotation;
 		this.parkingLot = parkingLot;
 		this.note ="";
@@ -136,6 +136,10 @@ public abstract class Vehicle {
 
 	public int getParkingLot() {
 		return parkingLot;
+	}
+
+	public boolean getParkid() {
+		return parked;
 	}
 
 	// ——————————————————————
