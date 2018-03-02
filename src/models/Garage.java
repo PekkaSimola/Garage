@@ -21,19 +21,17 @@ public class Garage {
 	int buses = 0;
 	int motorbikes = 0;
 	int parkinglot = 0;
-	
+
 	Map<Integer, Vehicle> vehicles;
 
 	public Garage() {
 		vehicles = new HashMap<Integer, Vehicle>(1);
 	}
-	
-	public void listAllParkedVehicles() {
-		for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-			System.out.println(vehicle.getValue().toString());
-		}
+
+	public Map<Integer, Vehicle> getVehicles() {
+		return vehicles;		
 	}
-	
+
 	public void listAll() {
 		System.out.println("Antal fordon parkerade av respektive typ:"
 				+ "\n" + cars + " bilar, "
@@ -42,7 +40,7 @@ public class Garage {
 				+ "\n" + buses + "bussar och"
 				+ "\n" + motorbikes + "motorcyklar.");
 	}
-	
+
 	public void parkVehicle(Vehicle vehicle) {
 		if( vehicles.size()<maxCapacity) {
 			if(! vehicles.containsValue(vehicle) ) {
@@ -50,7 +48,7 @@ public class Garage {
 				System.out.println("Din bil har parkerats på plats " + "parkinglot");
 			}
 			else {
-				System.out.println("The vehicle is already parked in the garage.");
+				System.out.println("Fordonet är redan parkerat i garaget.");
 			}
 		}else {
 			System.out.println("Garaget har nått sin maxkapacitet på " + maxCapacity + ".");
@@ -62,13 +60,13 @@ public class Garage {
 	}
 
 	public Vehicle findVehicle(int parkinglot){
-			return vehicles.get(parkinglot);	
+		return vehicles.get(parkinglot);	
 	}
-	
-	public List<Vehicle> findByProperty(int choice, String query) {
+
+	public List<Vehicle> findByProperty(int inputInt, String query) {
 		List<Vehicle> results = new ArrayList();
-		
-		switch(choice) {
+
+		switch(inputInt) {
 		case 1:
 			for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 				if(vehicle.getValue().getRegNo().equals(query)) {
@@ -76,56 +74,57 @@ public class Garage {
 				}
 			}
 			break;
-			
+
 		case 2:
 			query = query.toLowerCase();
 
 			switch(query) {
-			
-			case("bil"):	
+
+
+			case("1"):	
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Car ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for
-				break;
-				
-			case("båt"):
+			break;
+
+			case("2"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Boat ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for
-				break;
-			
-			case("flygplan"):
+			break;
+
+			case("3"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Aircraft ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for
-				break;
-				
-			case("buss"):
+			break;
+
+			case("4"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Bus ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for
-				break;
-				
-			case("motorcykel"):
+			break;
+
+			case("5"):
 				for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 					if( vehicle.getValue() instanceof Motorbike ) {
 						results.add(vehicle.getValue());
 					}//if
 				}//for
-				break;
-			
+			break;
+
 			default:
 				break;
 			}//switch
-			
+
 		case 3:
 			for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 				if(vehicle.getValue().getColor().equals(query)) {
@@ -135,10 +134,10 @@ public class Garage {
 		}//switch
 		return results;
 	}
-	
+
 	public void save() throws FileNotFoundException{
 		String temp = vehicles.toString();
-		
+
 		try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream("garage.lex"));
 			pw.write(temp);
@@ -148,13 +147,13 @@ public class Garage {
 			System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
 		}	
 	}
-	
+
 	/*public void load() throws FileNotFoundException{
 		ArrayList<Vehicle> test = new ArrayList();
 		FileInputStream in = new FileInputStream("garage.lex");
 		Scanner sc = new Scanner(in);
 		test.addAll(sc.next());
 	}
-	*/
-	
+	 */
+
 }
