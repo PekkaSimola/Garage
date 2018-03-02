@@ -5,6 +5,8 @@ public class Motorboat extends Boat {
 	private String motorSize;
 	private int numberOfEngines;
 	
+	
+	// Constructor to set all the properties except note
 	public Motorboat(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot, String homePort, String motorSize, int numberOfEngines) {
@@ -16,6 +18,7 @@ public class Motorboat extends Boat {
 		this.numberOfEngines = numberOfEngines;
 	}
 
+	// The Constructor to set all non-optional properties
 	public Motorboat(String regNo, String color, String brand) {
 		
 		super(regNo, color, brand);
@@ -24,6 +27,9 @@ public class Motorboat extends Boat {
 		this.numberOfEngines = 1;
 	}
 	
+	// ————————————————————————
+	// *** START of getters ***
+    // ————————————————————————	
 	public String getMotorSize() {
 		return motorSize;
 	}
@@ -31,6 +37,7 @@ public class Motorboat extends Boat {
 	public int getNumberOfEngines() {
 		return numberOfEngines;
 	}
+
 	
 	public String toString() {
 		StringBuilder s = new StringBuilder();

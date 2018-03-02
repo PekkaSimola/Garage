@@ -17,7 +17,9 @@ public abstract class Vehicle {
 	private int numberOfSeats;
 	private String parkingDenotation;
 	private int parkingLot;
+	private String note;
 		
+	// The Constructor to set all the properties	
 	public Vehicle(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot) {
@@ -36,8 +38,10 @@ public abstract class Vehicle {
 		this.numberOfSeats = numberOfSeats;
 		this.parkingDenotation = parkingDenotation;
 		this.parkingLot = parkingLot;
+		this.note ="";
 	}
 
+	// The Constructor to set the non-optional properties
 	public Vehicle(String regNo, String color, String brand) {
 		
 		parked = true;
@@ -53,42 +57,75 @@ public abstract class Vehicle {
 		this.fuelType = FuelType.UNDEFINED;
 		this.numberOfSeats = 0;
 		this.parkingDenotation = "";
-		this.parkingLot = 0;		
+		this.parkingLot = 0;
+		this.note = "";
 
 	}
+	
+	
+	// ——————————————————————————————
+	// *** START of local setters ***
+    // ——————————————————————————————
+	public void setNote(String note) {
+		this.note = note;
+	}
+	
+	public void setParkingDenotation(String parkingDenotation) {
+		this.parkingDenotation = parkingDenotation;
+	}
+	
+	public void setParkingLot(int parkingLot) {
+		this.parkingLot = parkingLot;
+	}
+	
+	public void setModel(String model) {
+		this.model = model;
+	}
+	// ——————————————————————
+	// *** END of setters ***
+    // ——————————————————————
 
+	
+
+	// ——————————————————————————————
+	// *** START of local getters ***
+    // ——————————————————————————————
+	public String getNote() {
+		return note;
+	}
+	
 	public String getRegNo() {
 		return regNo;
 	}
-
+	
 	public String getModel() {
 		return model;
 	}
-
+	
 	public String getBrand() {
 		return brand;
 	}
-
+	
 	public String getColor() {
 		return color;
 	}
-
+	
 	public FuelType getFuelType() {
 		return fuelType;
 	}
-
+	
 	public int getNumberOfWheels() {
 		return numberOfWheels;
 	}
-
+	
 	public int getNumberOfSeats() {
 		return numberOfSeats;
 	}
-
+	
 	public double getLengthMeters() {
 		return lengthMeters;
 	}
-
+	
 	public double getHeigthMeters() {
 		return heigthMeters;
 	}
@@ -101,6 +138,10 @@ public abstract class Vehicle {
 		return parkingLot;
 	}
 
+	// ——————————————————————
+	// *** END of getters ***
+    // ——————————————————————
+	
 	public String toString() {
 
 		StringBuilder slip = new StringBuilder();
@@ -145,6 +186,9 @@ public abstract class Vehicle {
 
 	}
 
+	// ———————————————————————————————————
+	// *** Convert to Swedish routines ***
+	// ———————————————————————————————————
 	public String carTypeToSwedish(CarType ct) {
 
 		if (ct == CarType.SEDAN) {
@@ -160,8 +204,6 @@ public abstract class Vehicle {
 		}
 	}
 	
-	//SEDAN, HATCHBACK, COUPE, VAN, UNDEFINED
-
 	public String booleanInSwedish(boolean b) {
 		if (b == true) {
 			return "SANT";
@@ -187,6 +229,7 @@ public abstract class Vehicle {
 		}
 	}
 	
+	// used by toString to get a length and height phrase in Swedish
 	private String lengthAndHeightInMeters(double length, double height) {
 
 		StringBuilder s = new StringBuilder();
@@ -219,6 +262,7 @@ public abstract class Vehicle {
 		}
 	}
 
+	// used by toString to convert lacking numbers (0) to a question-mark
 	private String zeroToQuestionMark(int no) {
 		if (no < 0.1) {
 			return "?";
