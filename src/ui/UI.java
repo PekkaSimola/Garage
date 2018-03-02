@@ -58,26 +58,15 @@ public class UI {
 				System.out.println("Du har gjort en ogiltig inmatning, vänligen försök igen.");
 			}else {
 				switch(inputString) {
-				case("1"):
-					parkVehicle();
-				break;
-
-				case("2"):
-					listAllVehicles();
-				break;
-
-				case("3"):
-					findByProperty();
-				break;
-
-				default:
-					break;
+				case("1"): parkVehicle(); break;
+				case("2"): listAllVehicles(); break;
+				case("3"): findByProperty(); break;
+				default: break;
+		
 				}//switch
-			}
-	
-			
-
-		}
+			}//else
+			sc.nextLine();
+		}//while
 		garage.save();
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 	}
@@ -167,7 +156,7 @@ public class UI {
 		System.out.println("Ange märke:");
 		brand = sc.next();
 
-		/*here i suppose we could have a beautiful compact lambda-predicate instead of an ugly redundant switch...
+		/*here I suppose we could have a beautiful compact lambda-predicate instead of an ugly redundant switch...
 		*/
 		switch(inputInt) {
 		case 1:
@@ -191,5 +180,6 @@ public class UI {
 
 	public void listAllVehicles() {
 		System.out.println(garage.toString());
+		System.out.println("Vänligen tryck ENTER för att fortsätta");
 	}
 }

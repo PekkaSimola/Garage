@@ -47,7 +47,12 @@ public class Garage {
 		if( vehicles.size()<maxCapacity) {
 			if(! vehicles.containsValue(vehicle) ) {
 				vehicles.put(++parkinglot, vehicle);
-				System.out.println("Din bil har parkerats på plats " + "parkinglot");
+				System.out.println("Din bil har parkerats på plats " + parkinglot);
+				if(vehicle instanceof Car)  cars++;
+				if(vehicle instanceof Boat)  boats++;
+				if(vehicle instanceof Aircraft) aircrafts++;
+				if(vehicle instanceof Bus) buses++;
+				if(vehicle instanceof Motorbike) motorbikes++;
 			}
 			else {
 				System.out.println("Fordonet är redan parkerat i garaget.");
@@ -136,20 +141,7 @@ public class Garage {
 		return results;
 	}
 
-	/*
-	public void save() throws FileNotFoundException{
-		String temp = vehicles.toString();
-
-		try {
-			PrintWriter pw = new PrintWriter(new FileOutputStream("garage.lex"));
-			pw.write( toString() );
-			pw.close();
-		}
-		catch (FileNotFoundException e) {
-			System.out.println("Det här ska inte kunna hända för filnamnet är hårdkodat.");
-		}	
-	}
-	 */
+	
 	public void save() {
 
 		try {
@@ -160,8 +152,6 @@ public class Garage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	public void load() throws FileNotFoundException{
@@ -172,10 +162,8 @@ public class Garage {
 			ois = new ObjectInputStream(fis);
 			vehicles = (Map<Integer, Vehicle>) ois.readObject();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
