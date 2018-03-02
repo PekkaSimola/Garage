@@ -149,11 +149,12 @@ public class Garage {
 		}	
 	}
 	
-//	public void load() throws FileNotFoundException{
-//		ArrayList<Vehicle> test = new ArrayList();
-//		FileInputStream in = new FileInputStream("garage.lex");
-//		Scanner sc = new Scanner(in);
-//		test.addAll(sc.next());
-//	}
-//	
+	/*public void load() throws FileNotFoundException{
+		ArrayList<Vehicle> test = new ArrayList();
+		FileInputStream in = new FileInputStream("garage.lex");
+		Scanner sc = new Scanner(in);
+		test.addAll(sc.next());
+	}
+	*/
+	
 }
