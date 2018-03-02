@@ -274,7 +274,10 @@ public abstract class Vehicle implements Serializable {
 			return "" + no;
 		}
 	}
-
+	
+	// return a sentence with single spaces between words/phrases
+	// • tabs are deleted
+	// • if firstCharToUpperCase == true, the very first word/phrase will begin with an upper case letter 
 	public static String fixTextInput(String s, boolean firstCharToUpperCase) {
 
 		s = s.trim();
