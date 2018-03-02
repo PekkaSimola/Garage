@@ -26,6 +26,13 @@ public class UI {
 	public UI(Garage garage) {
 		sc = new Scanner(System.in);
 		this.garage = garage;
+		
+		try {
+			garage.load();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		run();
 	}
 
@@ -68,9 +75,10 @@ public class UI {
 				}//switch
 			}
 	
-			garage.save();
+			
 
 		}
+		garage.save();
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 	}
 
@@ -182,6 +190,6 @@ public class UI {
 	}
 
 	public void listAllVehicles() {
-		garage.toString();
+		System.out.println(garage.toString());
 	}
 }

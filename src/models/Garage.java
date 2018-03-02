@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -159,20 +160,26 @@ public class Garage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 
+
+	}
+
+	public void load() throws FileNotFoundException{
+		FileInputStream fis;
+		ObjectInputStream ois;
+		try {
+			fis = new FileInputStream("garage.lex");
+			ois = new ObjectInputStream(fis);
+			vehicles = (Map<Integer, Vehicle>) ois.readObject();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void load() throws FileNotFoundException{
-
-		FileInputStream in = new FileInputStream("garage.lex");
-		Scanner sc = new Scanner(in);
-		while(sc.hasNext()) {
-			System.out.println(sc.next().toString());
-		}
-		sc.close();
-	}
-
 	public String toString() {
 		String output = "";
 		for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
