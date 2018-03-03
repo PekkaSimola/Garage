@@ -5,6 +5,10 @@ import java.text.DecimalFormat;
 
 public abstract class Vehicle implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean parked;
 	private String regNo;
 	private String color;
@@ -16,7 +20,6 @@ public abstract class Vehicle implements Serializable {
 	private int weightKG;
 	private FuelType fuelType;
 	private int numberOfSeats;
-	private String parkingDenotation;
 	private int parkingLot;
 	private String note;
 
@@ -37,7 +40,6 @@ public abstract class Vehicle implements Serializable {
 		this.weightKG = weightKG; // kan ev. tas bort
 		this.fuelType = fuelType; // kan ev. tas bort
 		this.numberOfSeats = numberOfSeats; // kan ev. tas bort
-		this.parkingDenotation = parkingDenotation;
 		this.parkingLot = parkingLot;
 		this.note = "";
 	}
@@ -57,7 +59,6 @@ public abstract class Vehicle implements Serializable {
 		this.weightKG = 0;
 		this.fuelType = FuelType.UNDEFINED;
 		this.numberOfSeats = 0;
-		this.parkingDenotation = "";
 		this.parkingLot = 0;
 		this.note = "";
 
@@ -68,10 +69,6 @@ public abstract class Vehicle implements Serializable {
 	// ——————————————————————————————
 	public void setNote(String note) {
 		this.note = note;
-	}
-
-	public void setParkingDenotation(String parkingDenotation) {
-		this.parkingDenotation = parkingDenotation;
 	}
 
 	public void setParkingLot(int parkingLot) {

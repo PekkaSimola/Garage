@@ -6,13 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 public class Garage {
 
@@ -71,7 +69,7 @@ public class Garage {
 	}
 
 	public List<Vehicle> findByProperty(int inputInt, String query) {
-		List<Vehicle> results = new ArrayList();
+		List<Vehicle> results = new ArrayList<Vehicle>();
 
 		switch(inputInt) {
 		case 1:
@@ -154,6 +152,7 @@ public class Garage {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void load() throws FileNotFoundException{
 		FileInputStream fis;
 		ObjectInputStream ois;

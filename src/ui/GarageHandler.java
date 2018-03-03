@@ -3,9 +3,7 @@ package ui;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
 import models.Aircraft;
 import models.Boat;
@@ -15,7 +13,7 @@ import models.Garage;
 import models.Motorbike;
 import models.Vehicle;
 
-public class UI {
+public class GarageHandler {
 
 	Scanner sc;
 	String inputString = "";
@@ -23,7 +21,7 @@ public class UI {
 	int inputInt = 0;
 	Garage garage;
 
-	public UI(Garage garage) {
+	public GarageHandler(Garage garage) {
 		sc = new Scanner(System.in);
 		this.garage = garage;
 		
