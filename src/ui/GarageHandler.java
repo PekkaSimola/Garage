@@ -1,6 +1,11 @@
 package ui;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -21,19 +26,57 @@ public class GarageHandler {
 	int inputInt = 0;
 	Garage garage;
 
+	/*
+	 * GarageHandler provides a user interface to handle the garage.
+	 * The constructor tries to load a Garage from previous state at startup.
+	 */
 	public GarageHandler(Garage garage) {
 		sc = new Scanner(System.in);
 		this.garage = garage;
-		
+
 		try {
-			garage.load();
+			load();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	
+
 		run();
 	}
 
+	/*
+	 * Saves the current state of Garage for future sessions.
+	 */
+	public void save() {
+		try {
+			FileOutputStream fout = new FileOutputStream("garage.lex");
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(garage);
+			oos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * Loads the Garage state from the latest session.
+	 */
+	public void load() throws FileNotFoundException{
+		FileInputStream fis;
+		ObjectInputStream ois;
+		try {
+			fis = new FileInputStream("garage.lex");
+			ois = new ObjectInputStream(fis);
+			garage = (Garage) ois.readObject();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * Runs the user interface. Will always save changes in the garage to file before exiting.
+	 */
 	public void run() {
 
 		while( !inputString.equalsIgnoreCase("q") ) {
@@ -66,14 +109,23 @@ public class GarageHandler {
 			default: break;
 
 			}//switch
+
 			sc.nextLine();	
+
 		}//while
-		garage.save();
+
+		save();
+
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
 
 	}//run
 
+	/*
+	 * Gives the user a list of options to chose from depending on by which property he wants to make a search.
+	 * Prints a list of all vehicles which match the search.
+	 */
 	public void findByProperty() {
+		inputInt = 0;
 		String resultPresentation = "";
 		String vehicleType = "";
 
@@ -83,12 +135,21 @@ public class GarageHandler {
 				+ "\n1: Registreringsnummer"
 				+ "\n2: Typ av fordon"
 				+ "\n3: Färg");
-		inputInt = sc.nextInt();
+
+		while(inputInt < 1 || inputInt > 5) {
+			try {
+				inputInt = sc.nextInt();
+				break;
+			}catch (InputMismatchException e) {
+				System.out.println("Du har gjort en felaktig inmatning.\nVänligen ange ditt val med 1, 2, eller 3.");
+				sc.nextLine();
+			}
+		}//while
 
 		if(inputInt == 1) {
 			System.out.println("Vänligen ange registreringsnummer:");
 			query = sc.next();
-			resultPresentation = "Din sökning på registreringsnumret " + query + "gav följande resultat:";
+			resultPresentation = "Din sökning på registreringsnumret " + query + " gav följande resultat:";
 		}
 
 		if(inputInt == 2) {
@@ -117,7 +178,7 @@ public class GarageHandler {
 			default: break;
 			}
 
-			resultPresentation = "Din sökning på fordonstypen " + vehicleType + "gav följande resultat:";
+			resultPresentation = "Din sökning på fordonstypen " + vehicleType + " gav följande resultat:";
 		}
 		if(inputInt == 3) {
 			System.out.println("Vänligen ange fordonets färg:");
@@ -128,13 +189,42 @@ public class GarageHandler {
 
 		results = garage.findByProperty(inputInt, query);
 
-		System.out.println(resultPresentation);
-		for(Vehicle vehicle : results) {
-			System.out.println(vehicle.toString());
+		try{
+			Vehicle v = results.get(0);
+
+			System.out.println(resultPresentation);
+			for(Vehicle vehicle : results) {
+				System.out.println(vehicle.toString());
+			}
+
+			if(inputInt == 1) {
+				if(v.getParked()) {
+					System.out.println("Vill du avparkera fordonet? (j/n)");
+				}
+				else {
+					System.out.println("Vill du parkera fordonet? (j/n)");
+				}
+				inputString = sc.next();
+				
+				if(inputString.equals("j")) {
+					v.setParked();
+					System.out.println("Ändringen har utförts.");
+				}
+				System.out.println("Kunden har alltid rätt.");
+			}
+			
+		}catch (Exception e){
+			System.out.println("Din sökning gav inga träffar.");
 		}
 		System.out.println("****************************************");
+
 	}
 
+
+	/*
+	 * The method asks the user which type of vehicle is to be parked, the vehicles registration number, color and model.
+	 * It creates a new instance of a subclass of Vehicle and puts it in the Garage.
+	 */
 	public void parkVehicle() {
 		inputInt = 0;
 		String regNo = "";
@@ -167,8 +257,7 @@ public class GarageHandler {
 		System.out.println("Ange märke:");
 		brand = sc.next();
 
-		/*here I suppose we could have a beautiful compact lambda-predicate instead of an ugly redundant switch...
-		 */
+
 		switch(inputInt) {
 		case 1:
 			garage.parkVehicle( new Car(regNo, color, brand) );
@@ -186,9 +275,11 @@ public class GarageHandler {
 			garage.parkVehicle( new Motorbike(regNo, color, brand) );
 			break;
 		}//switch
-		inputString = "";
 	}
 
+	/*
+	 * Lists all the vehicles in the garage.
+	 */
 	public void listAllVehicles() {
 		System.out.println(garage.toString());
 		System.out.println("Vänligen tryck ENTER för att fortsätta");

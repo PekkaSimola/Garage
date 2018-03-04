@@ -78,6 +78,10 @@ public abstract class Vehicle implements Serializable {
 	public void setModel(String model) {
 		this.model = model;
 	}
+	
+	public void setParked() {
+		parked = !parked;
+	}
 	// ——————————————————————
 	// *** END of setters ***
 	// ——————————————————————
