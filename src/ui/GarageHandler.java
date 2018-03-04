@@ -28,9 +28,9 @@ public class GarageHandler {
 		try {
 			garage.load();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 		run();
 	}
 
@@ -47,27 +47,31 @@ public class GarageHandler {
 
 			inputString = sc.nextLine();
 
-			if(inputString.equalsIgnoreCase("q")) {
-				break;
-			}
-			if(!inputString.equals("1")
+			while(!inputString.equals("1")
 					&& !inputString.equals("2")
-					&& !inputString.equals("3")) { 
+					&& !inputString.equals("3")) {
+
+				if(inputString.equalsIgnoreCase("q")) {
+					break;
+				}//if
+
 				System.out.println("Du har gjort en ogiltig inmatning, vänligen försök igen.");
-			}else {
-				switch(inputString) {
-				case("1"): parkVehicle(); break;
-				case("2"): listAllVehicles(); break;
-				case("3"): findByProperty(); break;
-				default: break;
-		
-				}//switch
-			}//else
-			sc.nextLine();
+				inputString = sc.next();
+			}//while
+
+			switch(inputString) {
+			case("1"): parkVehicle(); break;
+			case("2"): listAllVehicles(); break;
+			case("3"): findByProperty(); break;
+			default: break;
+
+			}//switch
+			sc.nextLine();	
 		}//while
 		garage.save();
 		System.out.println("Tack för att du besökte det Granna Garaget!\nHa en bra dag!");
-	}
+
+	}//run
 
 	public void findByProperty() {
 		String resultPresentation = "";
@@ -95,12 +99,21 @@ public class GarageHandler {
 					+ "\n4: Buss"
 					+ "\n5: Motorcykel");			
 			query = sc.next();
+			while(!query.equals("1")
+					&& !query.equals("2")
+					&& !query.equals("3")
+					&& !query.equals("4")
+					&& !query.equals("5")) { 
+				System.out.println("Du har gjort en ogiltig inmatning,\nvänligen försök igen med ett tal mellan 1 och 5.");
+				query = sc.next();
+			}
 
 			switch(query) {
 			case "1": vehicleType = "bil"; break;
 			case "2": vehicleType = "båt"; break;
 			case "3": vehicleType = "flygplan"; break;
 			case "4": vehicleType = "buss"; break;
+			case "5": vehicleType = "motorcykel"; break;
 			default: break;
 			}
 
@@ -109,7 +122,7 @@ public class GarageHandler {
 		if(inputInt == 3) {
 			System.out.println("Vänligen ange fordonets färg:");
 			query = sc.next();
-			
+
 			resultPresentation = "Din sökning på färgen " +query+ " gav följande resultat:";
 		}
 
@@ -134,7 +147,7 @@ public class GarageHandler {
 				+ "\n3: Flygplan"
 				+ "\n4: Buss"
 				+ "\n5: Motorcykel");
-		
+
 		while(inputInt < 1 || inputInt > 5) {
 			try {
 				inputInt = sc.nextInt();
@@ -144,7 +157,7 @@ public class GarageHandler {
 				sc.nextLine();
 			}
 		}//while
-		
+
 		System.out.println("Ange registreringsnummer:");
 		regNo = sc.next();
 
@@ -155,7 +168,7 @@ public class GarageHandler {
 		brand = sc.next();
 
 		/*here I suppose we could have a beautiful compact lambda-predicate instead of an ugly redundant switch...
-		*/
+		 */
 		switch(inputInt) {
 		case 1:
 			garage.parkVehicle( new Car(regNo, color, brand) );

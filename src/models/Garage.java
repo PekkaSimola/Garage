@@ -81,7 +81,6 @@ public class Garage {
 			break;
 
 		case 2:
-			query = query.toLowerCase();
 
 			switch(query) {
 
