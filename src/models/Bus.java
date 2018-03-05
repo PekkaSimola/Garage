@@ -2,10 +2,7 @@ package models;
 
 public class Bus extends Vehicle {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private boolean isDoubleDecker;
 	private boolean isHeadedBus;
 	private int maxAmountPassengers;
@@ -55,14 +52,30 @@ public class Bus extends Vehicle {
 	}
 	
 	public String toString() {
+		
 		StringBuilder s = new StringBuilder();
+
+		// Vehicle type as a title
+		if (isDoubleDecker) {
+			
+			s.append("DUBBELDÄCKARE:\n");
+			
+		} else if (isHeadedBus) {
+			
+			s.append("LEDAD BUSS:\n");
+			
+		} else {
+			
+			s.append("BUSS:\n");
+			
+		}
+		
+		//Common vehicle properties
 		s.append(super.toString());
-		s.append("\nDubbeldäckare: ");
-		s.append(super.booleanInSwedish(isDoubleDecker));
-		s.append("\nLedad buss: ");
-		s.append(super.booleanInSwedish(isHeadedBus));
+				
+		//A bus property (standard is 50)
 		s.append("\nMaxantal passagerare: ");
-		s.append(maxAmountPassengers);		
+		s.append(super.zeroToQuestionMark(maxAmountPassengers));		
 		
 		return s.toString();
 	}

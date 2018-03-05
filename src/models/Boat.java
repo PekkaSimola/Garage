@@ -2,10 +2,8 @@ package models;
 
 public class Boat extends Vehicle {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	// Common properties of all Boat-types 
+	//private static final long serialVersionUID = 1L;
 	private String homePort;
 
 	// The Constructor to set all the properties except note
@@ -36,10 +34,18 @@ public class Boat extends Vehicle {
 	}
 
 	public String toString() {
+
 		StringBuilder s = new StringBuilder();
+		
+		//Common vehicle properties
 		s.append(super.toString());
-		s.append("\nHemmahamn: ");
-		s.append(homePort);
+
+		//Boat specific property
+		if (homePort.length() > 0) {
+			s.append("\nHemmahamn: ");
+			s.append(homePort);
+		}
+
 		return s.toString();
 	}
 

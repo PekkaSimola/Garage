@@ -2,10 +2,7 @@ package models;
 
 public class Motorbike extends Vehicle {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	// private static final long serialVersionUID = 1L;
 	private boolean hasSideCar;
 
 	// The Constructor to set all the properties except note
@@ -26,16 +23,27 @@ public class Motorbike extends Vehicle {
 
 		this.hasSideCar = false;
 	}
-	
+
 	public boolean getSideCar() {
 		return hasSideCar;
 	}
 
 	public String toString() {
+
 		StringBuilder s = new StringBuilder();
+
+		// Motorbike as a title
+		s.append("MOTORCYKEL:\n");
+
+		// Common vehicle properties
 		s.append(super.toString());
-		s.append("\nHar sidovagn: ");
-		s.append(super.booleanInSwedish(hasSideCar));
+
+		// Motorbike specific property
+		if (hasSideCar) {
+			s.append("\nHar sidovagn: ");
+			s.append(super.booleanInSwedish(hasSideCar));
+		}
+
 		return s.toString();
 	}
 

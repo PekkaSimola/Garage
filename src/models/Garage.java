@@ -52,7 +52,7 @@ public class Garage implements Serializable{
 	 * @param vehicle the new Vehicle to be parked.
 	 */
 	public void parkVehicle(Vehicle vehicle) {
-		if( vehicles.size()<maxCapacity) {
+		if( vehicles.size() < maxCapacity) {
 			if(! vehicles.containsValue(vehicle) ) {
 				vehicles.put(++parkinglot, vehicle);
 				System.out.println("Din bil har parkerats på plats " + parkinglot);

@@ -2,15 +2,10 @@ package models;
 
 public class Car extends Vehicle {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private CarType carType;
 
-	/* 
-	 * The Constructor to set all the properties except note
-	 */
+	// The Constructor to set all the properties except note
 	public Car(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot, CarType carType) {
@@ -21,9 +16,7 @@ public class Car extends Vehicle {
 		this.carType = carType;
 	}
 
-	/*
-	 *  The Constructor to set the non-optional properties
-	 */
+    // The Constructor to set the non-optional properties
 	public Car(String regNo, String color, String brand) {
 		
 		super(regNo, color, brand);
@@ -40,10 +33,21 @@ public class Car extends Vehicle {
 	}
 
 	public String toString() {
+		
 		StringBuilder s = new StringBuilder();
+		
+		//CarType as a title
+		s.append(carTypeAsASwedishTitle(carType));
+		s.append(":\n");
+		
+		//Common vehicle properties
 		s.append(super.toString());
-		s.append("\nBiltyp: ");
-		s.append(super.carTypeToSwedish(carType));
+		
+		//A car specific property
+		if (carType != CarType.UNDEFINED) {
+			s.append("\nBiltyp: ");
+			s.append(super.carTypeToSwedish(carType));
+		}
 		return s.toString();
 	}
 	

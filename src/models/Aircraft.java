@@ -2,10 +2,7 @@ package models;
 
 public class Aircraft extends Vehicle {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private String homePort;
 
 	// The Constructor to set all the properties except note
@@ -36,10 +33,20 @@ public class Aircraft extends Vehicle {
 	}
 
 	public String toString() {
+		
 		StringBuilder s = new StringBuilder();
+		
+		//Aircraft as a title
+		s.append("FLYGPLAN:\n");
+		
+		//Common vehicle properties
 		s.append(super.toString());
-		s.append("\nHemmahamn: ");
-		s.append(homePort);
+		
+		//An aircraft specific property
+		if (homePort.length() > 0) {
+			s.append("\nHemmahamn: ");
+			s.append(homePort);
+		}
 		return s.toString();
 	}
 		

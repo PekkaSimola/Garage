@@ -5,9 +5,7 @@ import java.text.DecimalFormat;
 
 public abstract class Vehicle implements Serializable {
 
-	/**
-	 * 
-	 */
+	// Common properties of all vehicle-types 
 	private static final long serialVersionUID = 1L;
 	private boolean parked;
 	private String regNo;
@@ -23,7 +21,7 @@ public abstract class Vehicle implements Serializable {
 	private int parkingLot;
 	private String note;
 
-	// The Constructor to set all the properties
+	// The Constructor to set all the common properties
 	public Vehicle(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot) {
@@ -52,7 +50,7 @@ public abstract class Vehicle implements Serializable {
 		this.regNo = regNo.trim().toUpperCase();
 		this.color = fixTextInput(color, true);
 		this.numberOfWheels = 0;
-		this.model = "?";
+		this.model = "";
 		this.brand = fixTextInput(brand, true);
 		this.lengthMeters = 0;
 		this.heigthMeters = 0;
@@ -78,7 +76,7 @@ public abstract class Vehicle implements Serializable {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	
+
 	public void setParked() {
 		parked = !parked;
 	}
@@ -144,46 +142,50 @@ public abstract class Vehicle implements Serializable {
 	// ——————————————————————
 	// *** END of getters ***
 	// ——————————————————————
-
 	public String toString() {
 
 		StringBuilder slip = new StringBuilder();
 
+		// RegNo, brand and color should always exist.
+		// The remaining properties are optional
 		slip.append("RegNr: ");
 		slip.append(regNo);
 
 		slip.append("\nMärke: ");
 		slip.append(brand);
-		if (brand.length() > 0) {
+		
+		if (model.length() > 0) {
 			slip.append(" ");
-		}
-		if (!model.equals("?")) {
 			slip.append(model);
 		}
 
 		slip.append("\nFärg: ");
 		slip.append(color);
 
-		slip.append("\nBränsle: ");
-		slip.append(fuelTypeToSwedish(fuelType));
+		if (fuelType != FuelType.UNDEFINED) {
+			slip.append("\nBränsle: ");
+			slip.append(fuelTypeToSwedish(fuelType));
+		}
 
-		slip.append("\nSäten: ");
-		slip.append(zeroToQuestionMark(numberOfSeats));
 		if (numberOfSeats > 0) {
+			slip.append("\nSäten: ");
+			slip.append(numberOfSeats);
 			slip.append(" st");
 		}
-
-		slip.append("\nAntal hjul: ");
-		slip.append(zeroToQuestionMark(numberOfWheels));
+		
 		if (numberOfWheels > 0) {
+			slip.append("\nAntal hjul: ");
+			slip.append(numberOfWheels);
 			slip.append(" st");
 		}
 
-		slip.append(lengthAndHeightInMeters(lengthMeters, heigthMeters));
+		if (lengthMeters > 0.1 || heigthMeters > 0.1) {
+			slip.append(lengthAndHeightInMeters(lengthMeters, heigthMeters));
+		}
 
-		slip.append("\nVikt: ");
-		slip.append(zeroToQuestionMark(weightKG));
 		if (weightKG > 0) {
+			slip.append("\nVikt: ");
+			slip.append(weightKG);
 			slip.append(" kg");
 		}
 
@@ -191,9 +193,24 @@ public abstract class Vehicle implements Serializable {
 
 	}
 
-	// ———————————————————————————————————
-	// *** Convert to Swedish routines ***
-	// ———————————————————————————————————
+	 // ———————————————————————————————
+	 // *** Convert to Swedish routines
+	 // ———————————————————————————————
+	public String carTypeAsASwedishTitle(CarType ct) {
+
+		if (ct == CarType.SEDAN) {
+			return "SEDANBIL";
+		} else if (ct == CarType.HATCHBACK) {
+			return "KOMBIBIL";
+		} else if (ct == CarType.COUPE) {
+			return "COUPÉBIL";
+		} else if (ct == CarType.VAN) {
+			return "PAKETBIL";
+		} else {
+			return "BIL"; // UNKNOWN
+		}
+	}	
+	
 	public String carTypeToSwedish(CarType ct) {
 
 		if (ct == CarType.SEDAN) {
@@ -234,51 +251,48 @@ public abstract class Vehicle implements Serializable {
 		}
 	}
 
-	// used by toString to get a length and height phrase in Swedish
+    // Used by toString to get a Swedish length and height phrase
+	// • At least one of the properties is given at call.
 	private String lengthAndHeightInMeters(double length, double height) {
 
 		StringBuilder s = new StringBuilder();
 
-		if (length < 0.1 && height < 0.1) {
-			return "\nStorlek: ?";
+		s.append("\nStorlek (");
+
+		DecimalFormat f = new DecimalFormat("0.00 meter");
+
+		if (length > 0.1 && height > 0.1) {
+			s.append("L×H): ");
+			s.append(f.format(length));
+			s.append(" × ");
+			s.append(f.format(height));
+
+		} else if (length > 0.1) {
+			s.append("L): ");
+			s.append(f.format(length));
 
 		} else {
-
-			DecimalFormat f = new DecimalFormat("0.00 meter");
-
-			s.append("\nStorlek (");
-			if (length > 0.1 && height > 0.1) {
-				s.append("L×H): ");
-				s.append(f.format(length));
-				s.append(" × ");
-				s.append(f.format(height));
-
-			} else if (length > 0.1) {
-				s.append("L): ");
-				s.append(f.format(length));
-
-			} else {
-				s.append("H):");
-				s.append(f.format(height));
-			}
-
-			return s.toString();
-
+			s.append("H):");
+			s.append(f.format(height));
 		}
+
+		return s.toString();
+
 	}
 
 	// used by toString to convert lacking numbers (0) to a question-mark
-	private String zeroToQuestionMark(int no) {
+	public String zeroToQuestionMark(int no) {
 		if (no < 0.1) {
 			return "?";
 		} else {
 			return "" + no;
 		}
 	}
-	
-	// return a sentence with single spaces between words/phrases
-	// • tabs are deleted
-	// • if firstCharToUpperCase == true, the very first word/phrase will begin with an upper case letter 
+
+	// Returns a sentence with single spaces between words/phrases
+	// • Possible tabs are deleted
+	// • If firstCharToUpperCase == true, the very first word/phrase
+	//   will begin with an upper case letter
 	public static String fixTextInput(String s, boolean firstCharToUpperCase) {
 
 		s = s.trim();
@@ -295,10 +309,10 @@ public abstract class Vehicle implements Serializable {
 
 			word = splited[i];
 
-			// ignore empty strings (==space)
+			// Exclude empty strings (==space)
 			if (word.equals("") == false) {
 
-				// Convert the very first letter to upper case if required
+				// Possible conversion of the very first letter to upper case
 				if (i == 0 && firstCharToUpperCase == true) {
 					firstChar = word.substring(0, 1);
 					firstChar = firstChar.toUpperCase();
@@ -309,6 +323,8 @@ public abstract class Vehicle implements Serializable {
 				sentence.append(word);
 			}
 		}
+		
+		//Delete the preceding space
 		if (sentence.length() > 0) {
 			word = sentence.substring(1);
 		}

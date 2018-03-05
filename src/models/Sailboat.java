@@ -2,10 +2,7 @@ package models;
 
 public class Sailboat extends Boat {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	private int amountSails;
 	private int amountSailPoles;
 	
@@ -45,16 +42,28 @@ public class Sailboat extends Boat {
 	public int getAmountSailPoles() {
 		return amountSailPoles;
 	}
-
 	
+	// super = Boat
 	public String toString() {
+		
 		StringBuilder s = new StringBuilder();
-		// super = Boat
+		
+		//The boat type as a title
+		s.append("SEGELBÅT:\n");
+		
+		//Common boat and vehicle properties
 		s.append(super.toString());
-		s.append("\nAntal segel: ");
-		s.append(amountSails);		
-		s.append("\nAntal segelstolpar: ");
-		s.append(amountSailPoles);
+		
+		//Sail-boat specific properties
+		if (amountSails > 0) {
+			s.append("\nAntal segel: ");
+			s.append(amountSails);
+		}
+		if (amountSailPoles > 0) {
+			s.append("\nAntal segelstolpar: ");
+			s.append(amountSailPoles);
+		}
+			
 		return s.toString();
 	}
 	
