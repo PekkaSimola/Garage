@@ -148,7 +148,7 @@ public class GarageHandler {
 
 		if(inputInt == 1) {
 			System.out.println("Vänligen ange registreringsnummer:");
-			query = sc.next();
+			query = sc.next().toUpperCase();//Saved with capital letters
 			resultPresentation = "Din sökning på registreringsnumret " + query + " gav följande resultat:";
 		}
 
@@ -159,14 +159,14 @@ public class GarageHandler {
 					+ "\n3: Flygplan"
 					+ "\n4: Buss"
 					+ "\n5: Motorcykel");			
-			query = sc.next();
+			query = Vehicle.fixTextInput(sc.next(), true);//Saved with preceding capital letter
 			while(!query.equals("1")
 					&& !query.equals("2")
 					&& !query.equals("3")
 					&& !query.equals("4")
 					&& !query.equals("5")) { 
 				System.out.println("Du har gjort en ogiltig inmatning,\nvänligen försök igen med ett tal mellan 1 och 5.");
-				query = sc.next();
+				query = Vehicle.fixTextInput(sc.next(), true);//Saved with preceding capital letter
 			}
 
 			switch(query) {
@@ -182,7 +182,7 @@ public class GarageHandler {
 		}
 		if(inputInt == 3) {
 			System.out.println("Vänligen ange fordonets färg:");
-			query = sc.next();
+			query = Vehicle.fixTextInput( sc.next(), true);//Saved with preceding capital letter
 
 			resultPresentation = "Din sökning på färgen " +query+ " gav följande resultat:";
 		}
@@ -194,6 +194,7 @@ public class GarageHandler {
 
 			System.out.println(resultPresentation);
 			for(Vehicle vehicle : results) {
+				//TODO we should write a blank line between vehicles to make the output easier to read
 				System.out.println(vehicle.toString());
 			}
 
@@ -249,13 +250,13 @@ public class GarageHandler {
 		}//while
 
 		System.out.println("Ange registreringsnummer:");
-		regNo = sc.next();
+		regNo = sc.next().toUpperCase();//Saved with upper case letters
 
 		System.out.println("Ange färg:");
-		color = sc.next();
+		color = Vehicle.fixTextInput(sc.next(), true);//Saved with preceding capital letter
 
 		System.out.println("Ange märke:");
-		brand = sc.next();
+		brand = Vehicle.fixTextInput(sc.next(), true);//Saved with preceding capital letter
 
 
 		switch(inputInt) {
