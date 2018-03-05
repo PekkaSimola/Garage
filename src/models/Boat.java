@@ -2,6 +2,10 @@ package models;
 
 public class Boat extends Vehicle {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String homePort;
 
 	// The Constructor to set all the properties except note

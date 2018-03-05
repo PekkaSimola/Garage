@@ -2,11 +2,17 @@ package models;
 
 public class Bus extends Vehicle {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean isDoubleDecker;
 	private boolean isHeadedBus;
 	private int maxAmountPassengers;
 	
-	// The Constructor to set all the properties except note
+	/*
+	 *  The Constructor to set all the properties except note
+	 */
 	public Bus(boolean parked, String regNo, String color, int numberOfWheels, String model, String brand,
 			double lengthMeters, double heigthMeters, int weightKG, FuelType fuelType, int numberOfSeats,
 			String parkingDenotation, int parkingLot, boolean isDoubleDecker, boolean isHeadedBus,
@@ -20,7 +26,9 @@ public class Bus extends Vehicle {
 		this.maxAmountPassengers = maxAmountPassengers;
 	}
 
-	// The Constructor to set the non-optional properties
+	/*
+	 *  The Constructor to set the non-optional properties
+	 */
 	public Bus(String regNo, String color, String brand) {
 		
 		super(regNo, color, brand);

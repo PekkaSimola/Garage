@@ -2,6 +2,10 @@ package models;
 
 public class Motorboat extends Boat {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String motorSize;
 	private int numberOfEngines;
 	

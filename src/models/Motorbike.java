@@ -2,6 +2,10 @@ package models;
 
 public class Motorbike extends Vehicle {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean hasSideCar;
 
 	// The Constructor to set all the properties except note

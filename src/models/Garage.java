@@ -1,21 +1,18 @@
 package models;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
-public class Garage {
+public class Garage implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int maxCapacity = 50;
 	int cars = 0;
 	int boats = 0;
@@ -30,11 +27,17 @@ public class Garage {
 		vehicles = new HashMap<Integer, Vehicle>(1);
 	}
 
+	/*
+	 * returns the HashMap<Integer, Vehicle> containing the Vehicles.
+	 */
 	public Map<Integer, Vehicle> getVehicles() {
 		return vehicles;		
 	}
 
-	public void listAll() {
+	/*
+	 * Lists the number of items of each type.
+	 */
+	public void listAllByType() {
 		System.out.println("Antal fordon parkerade av respektive typ:"
 				+ "\n" + cars + " bilar, "
 				+ "\n" + boats + " båtar, "
@@ -43,6 +46,11 @@ public class Garage {
 				+ "\n" + motorbikes + "motorcyklar.");
 	}
 
+	/*
+	 * The method parks a new Vehicle in the garage
+	 * 
+	 * @param vehicle the new Vehicle to be parked.
+	 */
 	public void parkVehicle(Vehicle vehicle) {
 		if( vehicles.size()<maxCapacity) {
 			if(! vehicles.containsValue(vehicle) ) {
@@ -66,12 +74,24 @@ public class Garage {
 		maxCapacity = newMax;
 	}
 
-	public Vehicle findVehicle(int parkinglot){
-		return vehicles.get(parkinglot);	
+	/*
+	 * Takes a parking lot number as parameter and returns the corresponding Vehicle.
+	 */
+	public Vehicle findVehicle(int parkinglot) throws NullPointerException{
+		return vehicles.get(parkinglot);
 	}
 
-	public List<Vehicle> findByProperty(int inputInt, String query) {
-		List<Vehicle> results = new ArrayList();
+	/*
+	 * returns a list of Vehicles corresponding to the users options.
+	 * 
+	 * @param inputInt specifies the property.
+	 * 
+	 * @param query specifies the question.
+	 * 
+	 * @return results a list of Vehicles corresponding to the search made by the user.
+	 */
+	public List<Vehicle> findByProperty(int inputInt, String query) throws NullPointerException {
+		List<Vehicle> results = new ArrayList<Vehicle>();
 
 		switch(inputInt) {
 		case 1:
@@ -83,7 +103,6 @@ public class Garage {
 			break;
 
 		case 2:
-			query = query.toLowerCase();
 
 			switch(query) {
 
@@ -131,6 +150,7 @@ public class Garage {
 				break;
 			}//switch
 
+			
 		case 3:
 			for(Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
 				if(vehicle.getValue().getColor().equals(query)) {
@@ -141,37 +161,10 @@ public class Garage {
 		return results;
 	}
 
-	
-	public void save() {
-
-		try {
-			FileOutputStream fout = new FileOutputStream("garage.lex");
-			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			oos.writeObject(vehicles);
-			oos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void load() throws FileNotFoundException{
-		FileInputStream fis;
-		ObjectInputStream ois;
-		try {
-			fis = new FileInputStream("garage.lex");
-			ois = new ObjectInputStream(fis);
-			vehicles = (Map<Integer, Vehicle>) ois.readObject();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public String toString() {
 		String output = "";
 		for (Entry<Integer, Vehicle> vehicle : vehicles.entrySet()) {
-			output += vehicle.getValue().toString() + "\n";
+			output += vehicle.getValue().toString() + "\n\n";
 		}
 		return output;
 	}
