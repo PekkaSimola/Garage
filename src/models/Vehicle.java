@@ -210,9 +210,9 @@ public abstract class Vehicle implements Serializable {
 
 	public String booleanInSwedish(boolean b) {
 		if (b == true) {
-			return "SANT";
+			return "Ja";
 		} else {
-			return "FALSKT";
+			return "Nej";
 		}
 	}
 
