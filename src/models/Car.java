@@ -37,7 +37,7 @@ public class Car extends Vehicle {
 		StringBuilder s = new StringBuilder();
 		
 		//CarType as a title
-		s.append(carTypeAsASwedishTitle(carType));
+		s.append(super.carTypeAsASwedishTitle(carType));
 		s.append(":\n");
 		
 		//Common vehicle properties
