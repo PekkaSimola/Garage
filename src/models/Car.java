@@ -2,7 +2,7 @@ package models;
 
 public class Car extends Vehicle {
 	
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private CarType carType;
 
 	// The Constructor to set all the properties except note

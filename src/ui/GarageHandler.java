@@ -166,7 +166,7 @@ public class GarageHandler {
 					&& !query.equals("4")
 					&& !query.equals("5")) { 
 				System.out.println("Du har gjort en ogiltig inmatning,\nvänligen försök igen med ett tal mellan 1 och 5.");
-				query = Vehicle.fixTextInput(sc.next(), true);//Saved with preceding capital letter
+				query = Vehicle.fixTextInput(sc.next().toLowerCase(), true);//Saved with preceding capital letter
 			}
 
 			switch(query) {
@@ -182,7 +182,7 @@ public class GarageHandler {
 		}
 		if(inputInt == 3) {
 			System.out.println("Vänligen ange fordonets färg:");
-			query = Vehicle.fixTextInput( sc.next(), true);//Saved with preceding capital letter
+			query = Vehicle.fixTextInput( sc.next().toLowerCase(), true);//Saved with preceding capital letter
 
 			resultPresentation = "Din sökning på färgen " +query+ " gav följande resultat:";
 		}

@@ -2,7 +2,7 @@ package models;
 
 public class Sailboat extends Boat {
 	
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private int amountSails;
 	private int amountSailPoles;
 	

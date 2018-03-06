@@ -2,7 +2,7 @@ package models;
 
 public class Bus extends Vehicle {
 	
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private boolean isDoubleDecker;
 	private boolean isHeadedBus;
 	private int maxAmountPassengers;

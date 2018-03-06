@@ -3,7 +3,7 @@ package models;
 public class Boat extends Vehicle {
 
 	// Common properties of all Boat-types 
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private String homePort;
 
 	// The Constructor to set all the properties except note
